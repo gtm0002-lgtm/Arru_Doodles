@@ -22,14 +22,21 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<UserDto>>> Get()
+    [HttpGet]
+    public async Task<IActionResult> Get()
     {
-        var users = await _context.Users
-            .Select(u => new UserDto { Id = u.Id, Email = u.Email, UserName = u.UserName })
-            .ToListAsync();
-        return Ok(users);
+        try
+        {
+            var users = await _context.Users
+                .Select(u => new UserDto { Id = u.Id, Email = u.Email, UserName = u.UserName })
+                .ToListAsync();
+            return Ok(users);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message, stackTrace = ex.StackTrace });
+        }
     }
-
     [HttpPost]
     public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDto dto)
     {
