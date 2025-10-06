@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("API_Doodles-2.0")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2544cf75d6ae1b3e276ece80e96eb0803fcfe9ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("API_Doodles-2.0")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API_Doodles-2.0")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
