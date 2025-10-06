@@ -55,3 +55,4 @@ C:\Users\gerar\RiderProjects\API_Doodles-2.0\API_Doodles-2.0\obj\Debug\net9.0\re
 C:\Users\gerar\RiderProjects\API_Doodles-2.0\API_Doodles-2.0\obj\Debug\net9.0\API_Doodles-2.0.pdb
 C:\Users\gerar\RiderProjects\API_Doodles-2.0\API_Doodles-2.0\obj\Debug\net9.0\API_Doodles-2.0.genruntimeconfig.cache
 C:\Users\gerar\RiderProjects\API_Doodles-2.0\API_Doodles-2.0\obj\Debug\net9.0\ref\API_Doodles-2.0.dll
+C:\Users\gerar\RiderProjects\API_Doodles-2.0\API_Doodles-2.0\obj\Debug\net9.0\API_Doodles-2.0.sourcelink.json
