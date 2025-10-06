@@ -9,8 +9,6 @@ using API_Doodles_2._0.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-
 
 namespace API_Doodles_2._0.Controllers;
 

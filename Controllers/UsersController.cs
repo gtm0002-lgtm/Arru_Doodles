@@ -10,12 +10,12 @@ namespace API_Doodles_2._0.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UsersControllers : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly DatabaseContext _context;
     private readonly IPasswordHasher<Users> _hasher;
 
-    public UsersControllers(DatabaseContext context, IPasswordHasher<Users> hasher)
+    public UsersController(DatabaseContext context, IPasswordHasher<Users> hasher)
     {
         _context = context;
         _hasher = hasher;
