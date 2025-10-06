@@ -93,7 +93,14 @@ builder.Services.AddCors(options =>
 //Service Authorization:
 builder.Services.AddAuthorization();
 
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    db.Database.Migrate(); // 🪄 Aplica todas las migraciones pendientes automáticamente
+}
 
 //Development:
 if (app.Environment.IsDevelopment())
