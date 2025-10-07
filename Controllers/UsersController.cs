@@ -62,4 +62,44 @@ public class UsersController : ControllerBase
         
         return Ok(new UserDto { Email = user.Email, UserName = user.UserName, Id = user.Id });
     }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateUser(int id, [FromBody] RegisterDto dto)
+    {
+        var user = await _context.Users.FindAsync(id);
+        if (user == null)
+            return NotFound(new { message = "User not found" });
+
+        // Actualizamos solo los campos necesarios
+        user.UserName = dto.UserName ?? user.UserName;
+        user.Email = dto.Email ?? user.Email;
+
+        // Solo si envías un nuevo password
+        if (!string.IsNullOrEmpty(dto.Password))
+            user.Password = _hasher.HashPassword(user, dto.Password);
+
+        try
+        {
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "User updated successfully" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        var user = await _context.Users.FindAsync(id);
+        if (user == null)
+            return NotFound(new { message = "User not found" });
+
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "User deleted successfully" });
+    }
+
 }
