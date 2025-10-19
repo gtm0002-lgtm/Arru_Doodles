@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using API_Doodles_2._0.Data;
 using API_Doodles_2._0.Models;
-
+using System.Reflection;
 
 
 
@@ -42,10 +42,24 @@ builder.Services.AddSwaggerGen(options =>
             Array.Empty<string>()
         }
     });
+
+    // Include XML comments if available
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        options.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+    }
 });
 
 // Db Context:
-var connection = configuration.GetConnectionString("DefaultConnection");
+var connection = configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
+var sanitized = string.Join(';', connection
+    .Split(';', StringSplitOptions.RemoveEmptyEntries)
+    .Where(x => !x.TrimStart().StartsWith("Password=", StringComparison.OrdinalIgnoreCase)));
+
+Console.WriteLine($"Using Connection String: {sanitized}");
+
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseMySql(connection, ServerVersion.AutoDetect(connection))
 );
@@ -54,7 +68,6 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddScoped<IPasswordHasher<Users>, PasswordHasher<Users>>();
 
 // JwtToken Services:
-
 var jwtSection = configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSection["Key"] ?? string.Empty);
 
@@ -93,7 +106,6 @@ builder.Services.AddCors(options =>
 //Service Authorization:
 builder.Services.AddAuthorization();
 
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -109,14 +121,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//Prod:
-using (var scope = app.Services.CreateScope())
+// Root redirect to Swagger UI (dev only):
+if (app.Environment.IsDevelopment())
 {
-    var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-    db.Database.Migrate();
+    app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 }
 
+
 app.UseCors("AllowLocalhost");
+
 app.UseAuthentication();
 app.UseAuthorization();
 

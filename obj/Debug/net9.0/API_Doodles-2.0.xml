@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API_Doodles-2.0</name>
+    </assembly>
+    <members>
+        <member name="T:API_Doodles_2._0.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems1">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems1.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems1.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddOrdersAndOrderItems1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:API_Doodles_2._0.Migrations.AddStockToProducts">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddStockToProducts.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddStockToProducts.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddStockToProducts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

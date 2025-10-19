@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API_Doodles_2._0.Models.Items;
 
 namespace API_Doodles_2._0.Models;
 
@@ -19,4 +20,7 @@ public class Users
     public string Password { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    
+    // Navigate to Orders
+    public ICollection<Orders> Orders { get; set; } = new List<Orders>();
 }

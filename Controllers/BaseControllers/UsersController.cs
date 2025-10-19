@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using API_Doodles_2._0.Data;
+﻿using API_Doodles_2._0.Data;
+using API_Doodles_2._0.Dto.UserDto;
 using API_Doodles_2._0.Models;
-using API_Doodles_2._0.Dto;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace API_Doodles_2._0.Controllers;
+namespace API_Doodles_2._0.Controllers.BaseControllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -20,8 +19,7 @@ public class UsersController : ControllerBase
         _context = context;
         _hasher = hasher;
     }
-
-    [HttpGet]
+    
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -37,6 +35,7 @@ public class UsersController : ControllerBase
             return StatusCode(500, new { error = ex.Message, stackTrace = ex.StackTrace });
         }
     }
+    
     [HttpPost]
     public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDto dto)
     {
@@ -54,7 +53,6 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-
     public async Task<ActionResult<UserDto>> GetById(int id)
     {
         var user = await _context.Users.FindAsync(id);

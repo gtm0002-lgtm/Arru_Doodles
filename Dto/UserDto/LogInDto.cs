@@ -1,4 +1,4 @@
-﻿namespace API_Doodles_2._0.Dto;
+﻿namespace API_Doodles_2._0.Dto.UserDto;
 
 public class LogInDto
 {
