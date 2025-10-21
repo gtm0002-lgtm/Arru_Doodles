@@ -52,5 +52,17 @@
         <member name="M:API_Doodles_2._0.Migrations.AddStockToProducts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:API_Doodles_2._0.Migrations.AddPostMethodForProductsAndManageProductsViaStock">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddPostMethodForProductsAndManageProductsViaStock.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddPostMethodForProductsAndManageProductsViaStock.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddPostMethodForProductsAndManageProductsViaStock.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

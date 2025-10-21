@@ -13,6 +13,7 @@ public class DatabaseContext : DbContext
     public DbSet<Products> Products { get; set; }
     public DbSet<Orders> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<UserProduct> UserProducts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,6 +45,22 @@ public class DatabaseContext : DbContext
             .HasOne(p => p.Product)
             .WithMany(p => p.OrderItems)
             .HasForeignKey(i => i.ProductId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        // UserProduct (User owns Products like badges)
+        modelBuilder.Entity<UserProduct>()
+            .HasKey(up => new { up.UserId, up.ProductId });
+
+        modelBuilder.Entity<UserProduct>()
+            .HasOne(up => up.User)
+            .WithMany() // keep minimal, no navigation collection required
+            .HasForeignKey(up => up.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<UserProduct>()
+            .HasOne(up => up.Product)
+            .WithMany() // keep minimal
+            .HasForeignKey(up => up.ProductId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

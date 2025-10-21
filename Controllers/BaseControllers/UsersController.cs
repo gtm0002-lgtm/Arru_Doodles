@@ -16,6 +16,7 @@ public class UsersController : ControllerBase
 
     public UsersController(DatabaseContext context, IPasswordHasher<Users> hasher)
     {
+        // Inject the database context and the password hasher:
         _context = context;
         _hasher = hasher;
     }
@@ -25,6 +26,7 @@ public class UsersController : ControllerBase
     {
         try
         {
+            //
             var users = await _context.Users
                 .Select(u => new UserDto { Id = u.Id, Email = u.Email, UserName = u.UserName })
                 .ToListAsync();
@@ -100,4 +102,44 @@ public class UsersController : ControllerBase
         return Ok(new { message = "User deleted successfully" });
     }
 
+    // Associate (grant) a product/badge to a user — idempotent
+    [HttpPost("{userId:int}/products/{productId:int}")]
+    public async Task<IActionResult> GrantProductToUser(int userId, int productId)
+    {
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null) return NotFound(new { error = "User not found" });
+        var product = await _context.Products.FindAsync(productId);
+        if (product == null) return NotFound(new { error = "Product not found" });
+
+        var exists = await _context.UserProducts.AnyAsync(up => up.UserId == userId && up.ProductId == productId);
+        if (exists)
+        {
+            return Ok(new { message = "Product already granted to user" });
+        }
+
+        _context.UserProducts.Add(new UserProduct { UserId = userId, ProductId = productId });
+        await _context.SaveChangesAsync();
+        return Ok(new { message = "Product granted to user" });
+    }
+
+    // List products/badges granted to a user
+    [HttpGet("{userId:int}/products")]
+    public async Task<ActionResult<IEnumerable<UserProductDto>>> GetUserProducts(int userId)
+    {
+        var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
+        if (!userExists) return NotFound(new { error = "User not found" });
+
+        var items = await _context.UserProducts
+            .Where(up => up.UserId == userId)
+            .Join(_context.Products, up => up.ProductId, p => p.ProductId, (up, p) => new UserProductDto
+            {
+                ProductId = p.ProductId,
+                ProductName = p.ProductName,
+                GrantedAt = up.GrantedAt
+            })
+            .ToListAsync();
+
+        return Ok(items);
+    }
+    
 }
