@@ -64,5 +64,17 @@
         <member name="M:API_Doodles_2._0.Migrations.AddPostMethodForProductsAndManageProductsViaStock.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:API_Doodles_2._0.Migrations.DeletMethodSetAtProductsMethods">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.DeletMethodSetAtProductsMethods.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.DeletMethodSetAtProductsMethods.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.DeletMethodSetAtProductsMethods.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

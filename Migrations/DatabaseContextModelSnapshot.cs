@@ -106,6 +106,24 @@ namespace API_Doodles_2._0.Migrations
                     b.ToTable("products");
                 });
 
+            modelBuilder.Entity("API_Doodles_2._0.Models.UserProduct", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("GrantedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("UserId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("user_products");
+                });
+
             modelBuilder.Entity("API_Doodles_2._0.Models.Users", b =>
                 {
                     b.Property<int>("Id")
@@ -160,6 +178,25 @@ namespace API_Doodles_2._0.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("API_Doodles_2._0.Models.UserProduct", b =>
+                {
+                    b.HasOne("API_Doodles_2._0.Models.Products", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API_Doodles_2._0.Models.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });
