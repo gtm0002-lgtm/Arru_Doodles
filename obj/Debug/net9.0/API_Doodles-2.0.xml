@@ -76,5 +76,17 @@
         <member name="M:API_Doodles_2._0.Migrations.DeletMethodSetAtProductsMethods.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:API_Doodles_2._0.Migrations.AddedMultipartAsOtherContentTypePostProductsMethod">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddedMultipartAsOtherContentTypePostProductsMethod.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddedMultipartAsOtherContentTypePostProductsMethod.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:API_Doodles_2._0.Migrations.AddedMultipartAsOtherContentTypePostProductsMethod.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

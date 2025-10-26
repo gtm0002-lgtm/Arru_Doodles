@@ -20,7 +20,7 @@ public class UsersController : ControllerBase
         _context = context;
         _hasher = hasher;
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -37,12 +37,19 @@ public class UsersController : ControllerBase
             return StatusCode(500, new { error = ex.Message, stackTrace = ex.StackTrace });
         }
     }
-    
+
     [HttpPost]
     public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDto dto)
     {
         if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+        {
             return Conflict(new { error = "Email Already Exists" });
+        }
+
+        if (await _context.Users.AnyAsync(user => user.UserName == dto.UserName))
+        {
+            return Conflict(new { error = "Username Already Exists" });
+        }
 
         var user = new Users { UserName = dto.UserName, Email = dto.Email };
         user.Password = _hasher.HashPassword(user, dto.Password);
@@ -51,7 +58,7 @@ public class UsersController : ControllerBase
         await _context.SaveChangesAsync();
 
         var result = new UserDto { Email = user.Email, UserName = user.UserName, Id = user.Id };
-        return CreatedAtAction(nameof(GetById), new {id = user.Id}, result);
+        return CreatedAtAction(nameof(GetById), new { id = user.Id }, result);
     }
 
     [HttpGet("{id}")]
@@ -59,10 +66,10 @@ public class UsersController : ControllerBase
     {
         var user = await _context.Users.FindAsync(id);
         if (user == null) return NotFound();
-        
+
         return Ok(new UserDto { Email = user.Email, UserName = user.UserName, Id = user.Id });
     }
-    
+
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(int id, [FromBody] RegisterDto dto)
     {
@@ -88,7 +95,7 @@ public class UsersController : ControllerBase
             return StatusCode(500, new { error = ex.Message });
         }
     }
-    
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
@@ -141,5 +148,4 @@ public class UsersController : ControllerBase
 
         return Ok(items);
     }
-    
 }

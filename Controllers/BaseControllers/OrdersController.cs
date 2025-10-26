@@ -11,23 +11,23 @@ namespace API_Doodles_2._0.Controllers.BaseControllers;
 [Route("api/[controller]")]
 public class OrdersController : ControllerBase
 {
-    protected readonly DatabaseContext _context;
+    private readonly DatabaseContext _context;
     public OrdersController(DatabaseContext context) => _context = context;
 
     [HttpPost]
     public async Task<ActionResult<OrderDto>> Create([FromBody] CreateOrderDto dto)
     {
         var user = await _context.Users.FindAsync(dto.UserId);
-        if (user == null) return NotFound( new {message = "User not found"});
+        if (user == null) return NotFound(new { message = "User not found" });
         var productIds = dto.Items.Select(i => i.ProductId).ToList();
         var products = await _context.Products.Where(p => productIds.Contains(p.ProductId)).ToListAsync();
 
         if (products.Count != productIds.Count)
         {
-            return BadRequest(new {message = "Products not found due an Invalid Product or Products Id"});
+            return BadRequest(new { message = "Products not found due an Invalid Product or Products Id" });
         }
-        
-        var order = new Orders {UserId = dto.UserId, Status = "Pending"};
+
+        var order = new Orders { UserId = dto.UserId, Status = "Pending" };
         foreach (var item in dto.Items)
         {
             var product = products.First(p => p.ProductId == item.ProductId);
@@ -40,9 +40,9 @@ public class OrdersController : ControllerBase
                 UnitPrice = product.ProductPrice,
             });
         }
+
         _context.Orders.Add(order);
         await _context.SaveChangesAsync();
-        return Ok(new {message = "Order created successfully"});
 
         var result = new OrderDto
         {
@@ -85,7 +85,7 @@ public class OrdersController : ControllerBase
                 UnitPrice = i.UnitPrice
             }).ToList()
         };
-        
+
         return Ok(dto);
     }
 
@@ -115,5 +115,4 @@ public class OrdersController : ControllerBase
         });
         return Ok(result);
     }
-    
 }
